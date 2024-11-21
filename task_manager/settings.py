@@ -34,7 +34,8 @@ DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = ['webserver',
                  '127.0.0.1',
-                 'localhost',]
+                 'localhost',
+                 'python-project-52-0t31.onrender.com',]
 
 
 # Application definition
