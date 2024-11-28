@@ -7,4 +7,4 @@ from django.utils.translation import gettext as _
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'main.html')
+        return render(request, 'index.html')
