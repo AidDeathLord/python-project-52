@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container wrapper flex-grow-1">
+    <h1 class="my-4">Регистрация</h1>
+    <form action="{% url "create_user" %}" method="post">
+        {% csrf_token %}
+    
+        {% for elem in form %}
+            <div class="mb-3">
+                <label class="form-label">{{ elem.label }}</label>
+            
+                <div>{{ elem }}</div>
+            
+                {% if elem.help_text %}
+                <div class="form-text">{{ elem.help_text }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    
+        <input class="btn btn-primary" type="submit" value="Зарегистрировать">
+    </form>   
+</div>
+{% endblock %}
