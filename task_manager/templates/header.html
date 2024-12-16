@@ -12,15 +12,36 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url "users" %}">{% trans "Пользователи" %}</a>
               </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="{% url "login" %}">{% trans "Вход" %}</a>
-              <li>
-                
-              <li class="nav-item">
-                <a class="nav-link" href="{% url "create_user" %}">{% trans "Регистрация" %}</a>
-              <li>  
-
+            
+              {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "index" %}">{% trans "Статусы" %}</a>
+                  <li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "index" %}">{% trans "Метки" %}</a>
+                  <li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "index" %}">{% trans "Задачи" %}</a>
+                  <li>
+                  
+                  <li class="nav-item">
+                    <form method="post" action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <input class="btn nav-link" type="submit" value={% trans "Выход" %}>  
+{#                      <a class="nav-link" href="{% url "logout" %}">{% trans "Выход" %}</a>#}
+                    </form>
+                  <li>  
+              {% else %}    
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "login" %}">{% trans "Вход" %}</a>
+                  <li>
+                    
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "create_user" %}">{% trans "Регистрация" %}</a>
+                  <li>
+              {% endif %}  
             </ul>
         </div>
     
