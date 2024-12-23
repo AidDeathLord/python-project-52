@@ -7,9 +7,9 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Имя пользователя</th>
-      <th>Полное имя</th>
-      <th>Дата создания</th>
+      <th>{% trans "Имя пользователя" %}</th>
+      <th>{% trans "Полное имя" %}</th>
+      <th>{% trans "Дата создания" %}</th>
       <th></th>
     </tr>
   </thead>
@@ -22,9 +22,9 @@
         <td>{{ user.first_name }} {{ user.last_name }}</td>
         <td>{{ user.date_joined }}</td>
         <td>
-          <a href="/users/2/update/">Изменить</a>
+          <a href="{% url 'update_user' id=user.id %}">{% trans "Изменить" %}</a>
           <br>
-          <a href="/users/2/delete/">Удалить</a>
+          <a href="{% url 'delete_user' id=user.id %}">{% trans "Удалить" %}</a>
         </td>
       </tr>
     {% endfor %}

@@ -29,8 +29,7 @@
                   <li class="nav-item">
                     <form method="post" action="{% url 'logout' %}">
                       {% csrf_token %}
-                      <input class="btn nav-link" type="submit" value={% trans "Выход" %}>  
-{#                      <a class="nav-link" href="{% url "logout" %}">{% trans "Выход" %}</a>#}
+                      <input class="btn nav-link" type="submit" value={% trans "Выход" %}>
                     </form>
                   <li>  
               {% else %}    

@@ -21,17 +21,12 @@
 
     <main class="flex-grow-1">
       <div class="container-lg mt-3">
-{#        {% for message in messages %}#}
-{#            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">#}
-{#                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>#}
-{#                    <span aria-hidden="true">&times;</span>#}
-{#                </button>#}
-{#                {{ message | safe }}#}
-{#            </div>#}
-{#        {% endfor %}#}
         {% bootstrap_messages %}
-        {% block content %}
-        {% endblock %}
+        <div class="container wrapper flex-grow-1">
+            
+            {% block content %}
+            {% endblock %}
+        </div>
       </div>
     </main>
 

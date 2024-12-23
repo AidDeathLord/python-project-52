@@ -1,10 +1,10 @@
 from django import forms
 from .models import User
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
-class CreateUserForm(forms.ModelForm):
+class CreateUserForm(UserCreationForm):
     first_name = forms.CharField(
         label=_('Имя'),
         max_length=150,
