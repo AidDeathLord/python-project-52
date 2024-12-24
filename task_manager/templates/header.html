@@ -3,10 +3,8 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/">{% trans "Менеджер задач" %}</a>
-        <button class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navbarToggleExternalContent ">
+        
+        <div class="navbar-collapse collapse" id="navbarToggleExternalContent">
             <ul class="navbar-nav mr-auto">
 
               <li class="nav-item">
@@ -15,7 +13,7 @@
             
               {% if user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url "index" %}">{% trans "Статусы" %}</a>
+                    <a class="nav-link" href="{% url "statuses" %}">{% trans "Статусы" %}</a>
                   <li>
                   
                   <li class="nav-item">
@@ -43,7 +41,10 @@
               {% endif %}  
             </ul>
         </div>
-    
+        <button class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
     </nav>
     
 </div>

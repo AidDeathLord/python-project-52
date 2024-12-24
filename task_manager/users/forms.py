@@ -49,20 +49,6 @@ class CreateUserForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(
-        label=_('Имя пользователя'),
-        help_text=_('Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.'),
-        widget=forms.TextInput(attrs={'class': 'form-control',
-                                      'placeholder': _('Имя пользователя')})
-    )
-
-    password = forms.CharField(
-        min_length=3,
-        label=_('Пароль'),
-        help_text=_('Ваш пароль должен содержать как минимум 3 символа.'),
-        widget=forms.PasswordInput(attrs={'class': 'form-control',
-                                          'placeholder': _('Пароль')})
-    )
 
     class Meta:
         model = User
