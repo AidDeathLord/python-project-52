@@ -13,15 +13,8 @@ class CheckUserLoginMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class CheckUserEditingRightsMixin(UserPassesTestMixin):
-    permission_denied_message = None
-    redirect_field_name = None
-
+class CheckUserMixin(UserPassesTestMixin):
     def test_func(self):
         return self.request.user == self.get_object()
-
-    def handle_no_permission(self):
-        messages.error(self.request, self.permission_message)
-        return redirect(self.permission_url)
 
 

@@ -40,6 +40,15 @@ class UserForm(UserCreationForm):
 
 class UserUpdateForm(UserChangeForm):
 
+    first_name = forms.CharField(
+        label=_('Имя'),
+        max_length=150
+    )
+    last_name = forms.CharField(
+        label=_('Фамилия'),
+        max_length=150
+    )
+
     password1 = forms.CharField(
         label=_('Пароль'),
         help_text=_('Ваш пароль должен содержать как минимум 3 символа.'),

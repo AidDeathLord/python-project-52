@@ -7,6 +7,7 @@ from .forms import UserForm, UserUpdateForm
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 from task_manager.mixins import CheckUserLoginMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class UsersListView(ListView):
@@ -26,7 +27,8 @@ class UsersCreateView(SuccessMessageMixin, CreateView):
 
 
 class UsersUpdateView(SuccessMessageMixin, UpdateView,
-                      CheckUserLoginMixin):
+                      CheckUserLoginMixin, UserPassesTestMixin):
+
     template_name = 'context_form.html'
     model = User
     form_class = UserUpdateForm
