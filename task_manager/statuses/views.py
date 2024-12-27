@@ -16,7 +16,7 @@ class Statuses(CheckUserLoginMixin, View):
                       context={'statuses': statuses})
 
 
-class CreateStatus(CheckUserLoginMixin, View):
+class StatusCreate(CheckUserLoginMixin, View):
 
     def get(self, request, *args, **kwargs):
         form = CreateStatusForm
@@ -38,7 +38,7 @@ class CreateStatus(CheckUserLoginMixin, View):
         return render(request, 'context_form.html', context=context)
 
 
-class UpdateStatus(CheckUserLoginMixin, View):
+class StatusUpdate(CheckUserLoginMixin, View):
 
     def get(self, request, *args, **kwargs):
         status_id = kwargs.get('id')
@@ -66,7 +66,7 @@ class UpdateStatus(CheckUserLoginMixin, View):
         return render(request, 'context_form.html', context=context)
 
 
-class DeleteStatus(CheckUserLoginMixin, View):
+class StatusDelete(CheckUserLoginMixin, View):
 
     def get(self, request, *args, **kwargs):
         status_id = kwargs.get('id')
