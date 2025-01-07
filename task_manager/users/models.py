@@ -7,5 +7,5 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=150)
 
     def __str__(self):
-        return self.get_full_name()
+        return self.get_username()
 

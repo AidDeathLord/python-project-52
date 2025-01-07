@@ -6,8 +6,7 @@ from .models import User
 from .forms import UserForm, UserUpdateForm
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
-from task_manager.mixins import CheckUserLoginMixin
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from task_manager.mixins import CheckUserLoginMixin, CheckUserPermissionMixin
 
 
 class UsersListView(ListView):
@@ -26,31 +25,20 @@ class UsersCreateView(SuccessMessageMixin, CreateView):
                      'button_text': 'Зарегистрировать'}
 
 
-class UsersUpdateView(SuccessMessageMixin, UpdateView,
-                      CheckUserLoginMixin, UserPassesTestMixin):
-
-    template_name = 'context_form.html'
+class UsersUpdateView(CheckUserLoginMixin, CheckUserPermissionMixin,
+                      SuccessMessageMixin, UpdateView):
     model = User
-    form_class = UserUpdateForm
+    template_name = 'context_form.html'
     success_url = reverse_lazy('users')
+    form_class = UserUpdateForm
     success_message = _('Пользователь успешно изменен')
     extra_context = {'title': 'Изменение пользователя',
                      'button_text': 'Изменить'}
 
 
-class UserDelete(View):
-
-    def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
-        user = get_object_or_404(User, id=user_id)
-        context = {'user': f'{user.first_name} {user.last_name}',
-                   'user_id': user_id}
-        return render(request, 'users/delete.html', context=context)
-
-    def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
-        user = User.objects.get(id=user_id)
-        if user:
-            user.delete()
-
-        return redirect('users')
+class UsersDeleteView(CheckUserLoginMixin, CheckUserPermissionMixin,
+                      DeleteView):
+    model = User
+    template_name = 'users/delete.html'
+    success_url = reverse_lazy('users')
+    success_message = _('Пользователь успешно удален')
