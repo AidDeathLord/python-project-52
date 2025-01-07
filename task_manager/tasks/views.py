@@ -4,36 +4,38 @@ from task_manager.tasks.models import Task
 from .forms import CreateTaskForm
 from django.utils.translation import gettext as _
 from django.contrib import messages
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from task_manager.mixins import CheckUserLoginMixin, CheckUserPermissionMixin
 
 
 # Create your views here.
-class Tasks(View):
-
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        context = {'tasks': tasks}
-        return render(request, 'tasks/tasks_list.html', context=context)
+class Tasks(CheckUserLoginMixin, ListView):
+    model = Task
+    template_name = 'tasks/tasks_list.html'
+    context_object_name = 'tasks'
 
 
-class TaskCreate(View):
+class TaskCreate(CheckUserLoginMixin, CreateView):
+    model = Task
+    form_class = CreateTaskForm
+    template_name = 'context_form.html'
+    success_url = reverse_lazy('tasks')
+    success_message = _('Статус успешно создан')
+    extra_context = {'title': 'Создать статус',
+                     'button_text': 'Создать'}
 
-    def get(self, request, *args, **kwargs):
-        form = CreateTaskForm
-        context = {'form': form,
-                   'title': _('Создать задачу'),
-                   'button_text': _('Создать')}
-        return render(request, 'context_form.html', context=context)
 
-    def post(self, request, *args, **kwargs):
-        form = CreateTaskForm(request.POST)
-        if form.is_valid():
-            task = form.save(commit=False)
-            task.creator = request.user
-            task.save()
-            messages.success(request, _('Задача успешно создана'))
-            return redirect('tasks')
+class TaskUpdate(CheckUserLoginMixin, UpdateView):
+    model = Task
+    form_class = CreateTaskForm
+    template_name = 'context_form.html'
+    success_url = reverse_lazy('tasks')
+    success_message = _('Статус успешно изменен')
+    extra_context = {'title': 'Изменение статуса',
+                     'button_text': 'Изменить'}
 
-        context = {'form': form,
-                   'title': _('Создать задачу'),
-                   'button_text': _('Создать')}
-        return render(request, 'context_form.html', context=context)
+
+class TaskDelete(CheckUserLoginMixin, DeleteView):
+    model = Task
+    template_name = ''
