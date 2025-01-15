@@ -3,8 +3,8 @@ from task_manager.statuses import views
 
 
 urlpatterns = [
-    path('', views.Statuses.as_view(), name='statuses'),
-    path('create/', views.StatusCreate.as_view(), name='create_status'),
-    path('<int:pk>/update/', views.StatusUpdate.as_view(), name='update_status'),
-    path('<int:pk>/delete/', views.StatusDelete.as_view(), name='delete_status')
+    path('', views.StatusesView.as_view(), name='statuses'),
+    path('create/', views.StatusCreateView.as_view(), name='create_status'),
+    path('<int:pk>/update/', views.StatusUpdateView.as_view(), name='update_status'),
+    path('<int:pk>/delete/', views.StatusDeleteView.as_view(), name='delete_status')
 ]

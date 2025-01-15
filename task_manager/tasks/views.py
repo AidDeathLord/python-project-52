@@ -1,41 +1,55 @@
-from django.shortcuts import render, redirect
-from django.views import View
 from task_manager.tasks.models import Task
 from .forms import CreateTaskForm
 from django.utils.translation import gettext as _
-from django.contrib import messages
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
-from task_manager.mixins import CheckUserLoginMixin, CheckUserPermissionMixin
+from task_manager.mixins import UserLoginMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class Tasks(CheckUserLoginMixin, ListView):
+class TasksView(UserLoginMixin, ListView):
     model = Task
     template_name = 'tasks/tasks_list.html'
     context_object_name = 'tasks'
 
 
-class TaskCreate(CheckUserLoginMixin, CreateView):
+class TaskCreateView(UserLoginMixin, SuccessMessageMixin,
+                     CreateView):
     model = Task
     form_class = CreateTaskForm
     template_name = 'context_form.html'
     success_url = reverse_lazy('tasks')
-    success_message = _('Статус успешно создан')
-    extra_context = {'title': 'Создать статус',
+    success_message = _('Задача успешно создана')
+    extra_context = {'title': 'Создать задачу',
                      'button_text': 'Создать'}
 
+    def form_valid(self, form):
+        self.creator = self.request.user
+        form.instance.creator = self.creator
+        return super().form_valid(form)
 
-class TaskUpdate(CheckUserLoginMixin, UpdateView):
+
+class TaskUpdateView(UserLoginMixin, SuccessMessageMixin,
+                     UpdateView):
     model = Task
     form_class = CreateTaskForm
     template_name = 'context_form.html'
     success_url = reverse_lazy('tasks')
-    success_message = _('Статус успешно изменен')
-    extra_context = {'title': 'Изменение статуса',
+    success_message = _('Задача успешно изменена')
+    extra_context = {'title': 'Изменение задачи',
                      'button_text': 'Изменить'}
 
 
-class TaskDelete(CheckUserLoginMixin, DeleteView):
+class TaskDeleteView(UserLoginMixin,
+                     SuccessMessageMixin, DeleteView):
     model = Task
-    template_name = ''
+    template_name = 'tasks/delete.html'
+    success_url = reverse_lazy('tasks')
+    success_message = _('Задача успешно удалена')
+
+
+class TaskShowView(UserLoginMixin, DetailView):
+    model = Task
+    template_name = 'tasks/task_show.html'
+    context_object_name = 'task'

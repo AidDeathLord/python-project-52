@@ -1,20 +1,21 @@
+from django.http import HttpResponseRedirect
 from .models import Status
 from .forms import CreateStatusForm
 from django.utils.translation import gettext as _
-from task_manager.mixins import CheckUserLoginMixin
+from task_manager.mixins import UserLoginMixin, ProtectDeleteMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 
 
-class Statuses(CheckUserLoginMixin, ListView):
+class StatusesView(UserLoginMixin, ListView):
     model = Status
     template_name = 'statuses/statuses_list.html'
     context_object_name = 'statuses'
 
 
-class StatusCreate(CheckUserLoginMixin, SuccessMessageMixin,
-                   CreateView):
+class StatusCreateView(UserLoginMixin, SuccessMessageMixin,
+                       CreateView):
     model = Status
     template_name = 'context_form.html'
     form_class = CreateStatusForm
@@ -24,8 +25,8 @@ class StatusCreate(CheckUserLoginMixin, SuccessMessageMixin,
                      'button_text': _('Создать')}
 
 
-class StatusUpdate(CheckUserLoginMixin, SuccessMessageMixin,
-                   UpdateView):
+class StatusUpdateView(UserLoginMixin, SuccessMessageMixin,
+                       UpdateView):
     model = Status
     template_name = 'context_form.html'
     form_class = CreateStatusForm
@@ -35,9 +36,12 @@ class StatusUpdate(CheckUserLoginMixin, SuccessMessageMixin,
                      'button_text': _('Изменить')}
 
 
-class StatusDelete(CheckUserLoginMixin, SuccessMessageMixin,
-                   DeleteView):
+class StatusDeleteView(UserLoginMixin, ProtectDeleteMixin,
+                       SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses')
     success_message = _('Статус успешно удален')
+    error_message = _('Невозможно удалить статус, потому что он используется')
+    error_url = reverse_lazy('statuses')
+

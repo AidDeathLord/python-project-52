@@ -23,15 +23,19 @@
     {% for task in tasks %}    
       <tr>
         <td>{{ task.id }}</td>
-        <td>{{ task.title }}</td>
+          <td><a href="{% url "show_task" pk=task.id %}">{{ task.title }}</a></td>
         <td>{{ task.status }}</td>
-        <td>{{ task.Creator.first_name }} {{ task.Creator.last_name }}</td>
-        <td>{{ task.executor }}</td>
+        <td>{{ task.creator.first_name }} {{ task.creator.last_name }}</td>
+        {% if task.executor == None %}  
+          <td></td>
+          {% else %}  
+          <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
+        {% endif %}  
         <td>{{ task.created_at }}</td>  
         <td>
-          <a href="{% url "tasks" %}">{% trans "Изменить" %}</a>
+          <a href="{% url "update_task" pk=task.id %}">{% trans "Изменить" %}</a>
           <br>
-          <a href="{% url "tasks" %}">{% trans "Удалить" %}</a>
+          <a href="{% url "delete_task" pk=task.id %}">{% trans "Удалить" %}</a>
         </td>
       </tr>
     {% endfor %}
