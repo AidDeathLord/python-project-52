@@ -1,17 +1,21 @@
 from task_manager.tasks.models import Task
 from .forms import CreateTaskForm
 from django.utils.translation import gettext as _
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django_filters.views import FilterView
 from django.urls import reverse_lazy
 from task_manager.mixins import UserLoginMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from .filters import TaskFilter
 
 
 # Create your views here.
-class TasksView(UserLoginMixin, ListView):
+class TasksView(UserLoginMixin, FilterView):
     model = Task
+    filterset_class = TaskFilter
     template_name = 'tasks/tasks_list.html'
     context_object_name = 'tasks'
+    extra_context = {'button_text': 'Показать'}
 
 
 class TaskCreateView(UserLoginMixin, SuccessMessageMixin,
