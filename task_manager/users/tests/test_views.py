@@ -13,6 +13,7 @@ class TestsListView(UsersTests):
 
     def test_users_content(self):
         response = self.client.get(reverse_lazy('users'))
+        print(response)
         self.assertEqual(len(response.context['users']),
                          User.objects.count())
         self.assertQuerySetEqual(
@@ -21,7 +22,7 @@ class TestsListView(UsersTests):
             ordered=False
         )
 
-    def test_links(self):
+    def test_users_links(self):
         response = self.client.get(reverse_lazy('users'))
 
         self.assertContains(response, '/users/create/')
@@ -57,7 +58,7 @@ class TestUpdateView(UsersTests):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('login'))
 
-    def test_update_other_view(self) -> None:
+    def test_update_other_view(self):
         self.client.force_login(self.user1)
 
         response = self.client.get(
@@ -66,3 +67,31 @@ class TestUpdateView(UsersTests):
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('users'))
+
+    def test_delete_view_self(self):
+        self.client.force_login(self.user1)
+
+        response = self.client.get(
+            reverse_lazy('delete_user', kwargs={'pk': self.user1.id})
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='users/delete.html')
+
+    def test_delete_view_other(self):
+        self.client.force_login(self.user1)
+
+        response = self.client.get(
+            reverse_lazy('delete_user', kwargs={'pk': self.user2.id})
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('users'))
+
+    def test_delete_view_not_logged_user(self):
+        response = self.client.get(
+            reverse_lazy('delete_user', kwargs={'pk': self.user2.id})
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse_lazy('login'))
