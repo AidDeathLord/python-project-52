@@ -13,7 +13,6 @@ class TestsListView(UsersTests):
 
     def test_users_content(self):
         response = self.client.get(reverse_lazy('users'))
-        print(response)
         self.assertEqual(len(response.context['users']),
                          User.objects.count())
         self.assertQuerySetEqual(

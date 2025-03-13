@@ -6,7 +6,7 @@ from .forms import LabelCreateForm
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from task_manager.tasks.models import Task
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.contrib import messages
 
 

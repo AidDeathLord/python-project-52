@@ -1,6 +1,5 @@
 from task_manager.labels.models import Label
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from .tests_setup import LabelsTests
 
