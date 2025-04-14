@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
-from task_manager.mixins import UserLoginMixin
+from task_manager.mixins import UserLoginMixin, ProtectDeleteMixin, AuthorDeletionMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from .filters import TaskFilter
 
@@ -45,12 +45,14 @@ class TaskUpdateView(UserLoginMixin, SuccessMessageMixin,
                      'button_text': 'Изменить'}
 
 
-class TaskDeleteView(UserLoginMixin,
-                     SuccessMessageMixin, DeleteView):
+class TaskDeleteView(UserLoginMixin, ProtectDeleteMixin,
+                     SuccessMessageMixin, AuthorDeletionMixin, DeleteView):
     model = Task
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks')
     success_message = _('Задача успешно удалена')
+    creator_message = _('Задачу может удалить только ее автор')
+    creator_url = reverse_lazy('tasks')
 
 
 class TaskShowView(UserLoginMixin, DetailView):
