@@ -1,4 +1,3 @@
-from django.http import HttpResponseRedirect
 from .models import Status
 from .forms import CreateStatusForm
 from django.utils.translation import gettext as _
@@ -44,4 +43,3 @@ class StatusDeleteView(UserLoginMixin, ProtectDeleteMixin,
     success_message = _('Статус успешно удален')
     error_message = _('Невозможно удалить статус, потому что он используется')
     error_url = reverse_lazy('statuses')
-

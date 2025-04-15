@@ -135,8 +135,7 @@ class TestFilterTasks(TasksTests):
         self.assertNotContains(response, self.task3.title)
 
     def test_filter_tasks_executor(self):
-        response = self.client.get(reverse_lazy('tasks'),
-                              {'executor': self.user2.pk})
+        response = self.client.get(reverse_lazy('tasks'), {'executor': self.user2.pk})
 
         self.assertEqual(response.context['tasks'].count(), 2)
         self.assertContains(response, self.task1.title)

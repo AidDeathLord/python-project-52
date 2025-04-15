@@ -19,7 +19,7 @@ class TestCreateTask(TasksTests):
         self.assertEqual(Task.objects.count(), self.count + 1)
         self.assertEqual(Task.objects.last().title, 'Test')
         self.assertEqual(Task.objects.last().creator, self.user1)
-        self.assertEqual(Task.objects.last().executor, self.user1 )
+        self.assertEqual(Task.objects.last().executor, self.user1)
 
     def test_create_fields_missing_task(self):
         response = self.client.post(reverse_lazy('create_task'),
@@ -34,7 +34,7 @@ class TestCreateTask(TasksTests):
         self.assertEqual([error_help], errors['title'])
 
         self.assertIn('status', errors)
-        self.assertEqual( [error_help], errors['status'])
+        self.assertEqual([error_help], errors['status'])
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Task.objects.count(), self.count)
@@ -56,31 +56,31 @@ class TestCreateTask(TasksTests):
 
 class TestUpdateTask(TasksTests):
     def test_update_task(self):
-        response = self.client.post(reverse_lazy('update_task',
-                                                 kwargs={'pk': 2}),
-                                                 data={'title': 'Test Task22',
-                                                       'description': 'Test Task22',
-                                                       'executor': 2,
-                                                       'status': 1})
+        response = self.client.post(
+            reverse_lazy('update_task', kwargs={'pk': 2}),
+            data={'title': 'Test Task22',
+                  'description': 'Test Task22',
+                  'executor': 2,
+                  'status': 1})
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
 
         self.assertEqual(Task.objects.count(), self.count)
         self.assertEqual(
-            Task.objects.get(id=self.task2.id).title, 'Test Task22' )
+            Task.objects.get(id=self.task2.id).title, 'Test Task22')
         self.assertEqual(
             Task.objects.get(id=self.task2.id).executor.id, 2)
 
     def test_update_task_not_logged_in(self):
         self.client.logout()
 
-        response = self.client.post(reverse_lazy('update_task',
-                                                 kwargs={'pk': 2}),
-                                                 data={'title': 'Test Task22',
-                                                       'description': 'Test Task22',
-                                                       'executor': 2,
-                                                       'status': 1})
+        response = self.client.post(
+            reverse_lazy('update_task', kwargs={'pk': 2}),
+            data={'title': 'Test Task22',
+                  'description': 'Test Task22',
+                  'executor': 2,
+                  'status': 1})
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('login'))

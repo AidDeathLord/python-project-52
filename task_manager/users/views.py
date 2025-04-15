@@ -1,5 +1,3 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import User

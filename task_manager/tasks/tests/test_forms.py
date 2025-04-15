@@ -6,7 +6,7 @@ class TaskCreateFormTest(TasksTests):
     def test_task_form_valid(self):
         form = CreateTaskForm(data={'title': 'Test Task5',
                                     'description': 'Test Task',
-                                    'executor':1,
+                                    'executor': 1,
                                     'status': 1})
 
         self.assertTrue(form.is_valid())

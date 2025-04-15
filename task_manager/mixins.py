@@ -4,13 +4,13 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.db.models.deletion import ProtectedError
-from task_manager.tasks.models import Task
 
 
 class UserLoginMixin(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.error(request, _('Вы не авторизованы! Пожалуйста, выполните вход.'))
+            messages.error(request,
+                           _('Вы не авторизованы! Пожалуйста, выполните вход.'))
             return redirect(reverse_lazy('login'))
         return super().dispatch(request, *args, **kwargs)
 
@@ -30,6 +30,7 @@ class UserDeletePermissionMixin(UserPassesTestMixin):
 class ProtectDeleteMixin:
     error_message = None
     error_url = None
+
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
