@@ -7,4 +7,4 @@ build:
 render-start:
 	gunicorn task_manager.wsgi
 migrate:
-    python manage.py migrate
+    python.exe manage.py migrate
