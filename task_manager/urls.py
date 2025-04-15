@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from task_manager.views import IndexView, UserLoginView, UserLogoutView
+from task_manager.views import (IndexView,
+                                UserLoginView,
+                                UserLogoutView,
+                                test_rollbar)
 
 
 urlpatterns = [
@@ -29,5 +32,6 @@ urlpatterns = [
     path('tasks/', include('task_manager.tasks.urls')),
     path('labels/', include('task_manager.labels.urls')),
 
+    path('test_rollbar/', test_rollbar, name='test_rollbar'),
     path('admin/', admin.site.urls),
 ]
