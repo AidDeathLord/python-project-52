@@ -48,7 +48,7 @@ class TestCreateTask(TasksTests):
         errors = response.context['form'].errors
 
         self.assertIn('title', errors)
-        self.assertEqual(['Задача с таким Имя уже существует.'],  errors['title'])
+        self.assertEqual(['Задача с таким Имя уже существует.'], errors['title'])
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Task.objects.count(), self.count)
