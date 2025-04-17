@@ -6,6 +6,7 @@ build:
 	./build.sh
 test:
 	poetry run python manage.py test
+check: test lint
 render-start:
 	gunicorn task_manager.wsgi
 migrate:
