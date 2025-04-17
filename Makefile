@@ -4,6 +4,8 @@ lint:
 	poetry run flake8 task_manager
 build:
 	./build.sh
+test:
+    coverage run manage.py test
 render-start:
 	gunicorn task_manager.wsgi
 migrate:
