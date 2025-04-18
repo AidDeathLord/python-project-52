@@ -19,6 +19,8 @@ jobs:
           pip install poetry
           make install
           make migrate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Run linter and pytest
         run: |
           make check
