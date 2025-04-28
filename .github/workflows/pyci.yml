@@ -42,7 +42,7 @@ jobs:
         run: |
           make check
         env:
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/mydb
+          DATABASE_URL: postgres
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       - name: Run test coverage
