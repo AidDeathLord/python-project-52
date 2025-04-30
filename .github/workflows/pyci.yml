@@ -36,15 +36,14 @@ jobs:
           make install
           make migrate
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
 
       - name: Run linter and pytest
         run: |
           make check
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: False
 
       - name: Run test coverage
         run: |
