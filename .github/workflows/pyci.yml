@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      postgres:
+      db:
         image: postgres:15
         ports:
           - "5432:5432"
@@ -20,11 +20,11 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: mydb
 
-    env:
-      DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
+#    env:
+#      DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -36,14 +36,15 @@ jobs:
           make install
           make migrate
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
 
       - name: Run linter and pytest
         run: |
           make check
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: False
 
       - name: Run test coverage
         run: |
