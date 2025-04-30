@@ -20,29 +20,26 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: mydb
 
-#    env:
-#      DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-        # make depends on uv
+
       - name: Install dependencies
         run: |
           pip install poetry
           make install
           make migrate
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
 
       - name: Run linter and pytest
         run: |
           make check
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       - name: Run test coverage
