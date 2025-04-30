@@ -21,7 +21,7 @@ jobs:
           POSTGRES_DB: mydb
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
+      DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
 
     steps:
       - uses: actions/checkout@v4
@@ -36,13 +36,13 @@ jobs:
           make install
           make migrate
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
 
       - name: Run linter and pytest
         run: |
           make check
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
+          DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/mydb
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       - name: Run test coverage
