@@ -1,23 +1,32 @@
 from task_manager.tasks.models import Task
-from .tests_setup import TasksTests
+from task_manager.users.models import User
+from task_manager.statuses.models import Status
+from django.test import TestCase
 
 
-class TaskModelTest(TasksTests):
-    def test_task_creation(self):
-        task = Task.objects.create(
-            title='Test Task4',
-            description='Test description',
-            creator=self.user1,
-            status=self.status1,
-            executor=self.user2,
+class TaskModelTest(TestCase):
+    def setUp(self):
+        self.test_user = User.objects.create_user(username='Test User', password='123')
+        self.client.login(username='Test User', password='123')
+
+        self.test_status = Status.objects.create(name='Test Status')
+
+        self.test_task = Task.objects.create(
+            title='Test Task',
+            description='Test Task',
+            creator=self.test_user,
+            status=self.test_status,
+            executor=self.test_user,
         )
-        task.label.set(self.label1)
 
-        self.assertTrue(isinstance(task, Task))
-        self.assertEqual(task.__str__(), 'Test Task4')
-        self.assertEqual(task.title, 'Test Task4')
-        self.assertEqual(task.description, 'Test description')
-        self.assertEqual(task.creator, self.user1)
-        self.assertEqual(task.status, self.status1)
-        self.assertEqual(task.executor, self.user2)
-        self.assertEqual(task.label.get(pk=1), self.label)
+    def test_task_creation(self):
+        self.test_task.label.create(name='Test Label')
+
+        self.assertTrue(isinstance(self.test_task, Task))
+        self.assertEqual(self.test_task.__str__(), 'Test Task')
+        self.assertEqual(self.test_task.title, 'Test Task')
+        self.assertEqual(self.test_task.description, 'Test Task')
+        self.assertEqual(self.test_task.creator, self.test_user)
+        self.assertEqual(self.test_task.status, self.test_status)
+        self.assertEqual(self.test_task.executor, self.test_user)
+        self.assertEqual(str(self.test_task.label.get(pk=1)), 'Test Label')
