@@ -1,20 +1,43 @@
-from .tests_setup import TasksTests
 from task_manager.tasks.forms import CreateTaskForm
+from task_manager.users.models import User
+from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
+from task_manager.tasks.models import Task
+
+from django.urls import reverse_lazy
+from django.test import TestCase
 
 
-class TaskCreateFormTest(TasksTests):
+class TaskCreateFormTest(TestCase):
+    def setUp(self):
+        self.test_user = User.objects.create_user(username='Test User', password='123')
+        self.client.login(username='Test User', password='123')
+
+        self.test_status = Status.objects.create(name='Test Status')
+        self.test_label = Label.objects.create(name='Test Label')
+
     def test_task_form_valid(self):
-        form = CreateTaskForm(data={'title': 'Test Task5',
-                                    'description': 'Test Task',
-                                    'executor': 1,
-                                    'status': 1})
+        task = {
+            'title': 'Test Task',
+            'description': 'Test Description',
+            'creator': self.test_user.id,
+            'status': self.test_status.id,
+            'executor': self.test_user.id,
+            'label': [self.test_label.id]
+        }
 
+        form = CreateTaskForm(data=task)
         self.assertTrue(form.is_valid())
 
     def test_task_form_invalid(self):
-        form = CreateTaskForm(data={'title': 'Test Task',
-                                    'description': '',
-                                    'executor': '',
-                                    'status': 1})
+        task = {
+            'title': '',
+            'description': '',
+            'creator': self.test_user.id,
+            'status': '',
+            'executor': self.test_user.id,
+            'label': self.test_label.id
+        }
 
+        form = CreateTaskForm(data=task)
         self.assertFalse(form.is_valid())
