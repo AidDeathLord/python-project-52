@@ -31,4 +31,4 @@ class TaskModelTest(TestCase):
         self.assertEqual(self.test_task.creator, self.test_user)
         self.assertEqual(self.test_task.status, self.test_status)
         self.assertEqual(self.test_task.executor, self.test_user)
-        self.assertEqual(str(self.test_task.label.get(pk=1)), 'Test Label')
+        self.assertEqual(str(self.test_task.label.last().name), 'Test Label')
