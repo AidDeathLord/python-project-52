@@ -15,3 +15,6 @@ migrate:
 PORT ?= 8000
 start:
 	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) task_manager.wsgi
+test-coverage:
+    poetry run coverage run manage.py test task_manager
+    poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
