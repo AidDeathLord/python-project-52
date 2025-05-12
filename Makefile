@@ -17,4 +17,4 @@ test:
 	poetry run python manage.py test
 test-coverage:
 	poetry run coverage run manage.py test task_manager
-    poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
+	poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
