@@ -40,7 +40,6 @@ class TestTask(TestCase):
             executor=self.test_user2,
         )
 
-
         self.count = Task.objects.count()
 
         self.task1 = {
@@ -115,7 +114,7 @@ class TestTask(TestCase):
 
     def test_update_task(self):
         response = self.client.post(
-            reverse_lazy('update_task',kwargs={'pk': self.test_task2.id}),
+            reverse_lazy('update_task', kwargs={'pk': self.test_task2.id}),
             data={
                 'title': 'Test Task 1234',
                 'description': 'Test Task 1234',
