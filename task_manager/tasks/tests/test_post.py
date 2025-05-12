@@ -123,7 +123,7 @@ class TestTask(TestCase):
                 'description': 'Test Task 1234',
                 'creator': self.test_user.id,
                 'status': self.test_status2.id,
-                'executor': self.test_user2.id,
+                'executor': self.test_user.id,
             }
         )
 
