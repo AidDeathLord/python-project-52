@@ -34,6 +34,13 @@ class TestTask(TestCase):
             status=self.test_status,
             executor=self.test_user2,
         )
+        self.test_task3 = Task.objects.create(
+            title='Test Task 2222',
+            description='Test Task 2222',
+            creator=self.test_user2,
+            status=self.test_status,
+            executor=self.test_user2,
+        )
 
 
         self.count = Task.objects.count()
@@ -135,8 +142,8 @@ class TestTask(TestCase):
         response = self.client.post(
             reverse_lazy('update_task', kwargs={'pk': self.test_task2.id}),
             data={
-                'title': 'Test Task 1234',
-                'description': 'Test Task 1234',
+                'title': 'Test Task 2221',
+                'description': 'Test Task 2221',
                 'creator': self.test_user.id,
                 'status': self.test_status2.id,
                 'executor': self.test_user2.id,
@@ -150,22 +157,21 @@ class TestTask(TestCase):
         self.assertEqual(
             Task.objects.get(id=self.test_task2.id).title, 'Test Task 123')
 
-
-class TestDeleteTask(TasksTests):
     def test_delete_task(self):
-        response = self.client.post(reverse_lazy('delete_task', kwargs={'pk': 1}))
+        response = self.client.post(
+            reverse_lazy('delete_task', kwargs={'pk': self.test_task2.id}))
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
         self.assertEqual(Task.objects.count(), self.count - 1)
         with self.assertRaises(ObjectDoesNotExist):
-            Task.objects.get(id=self.task1.id)
+            Task.objects.get(id=self.test_task2.id)
 
     def test_delete_task_not_logged_in(self):
         self.client.logout()
 
         response = self.client.post(
-            reverse_lazy('delete_task', kwargs={'pk': 1})
+            reverse_lazy('delete_task', kwargs={'pk': self.test_task2.id})
         )
 
         self.assertEqual(response.status_code, 302)
@@ -173,7 +179,8 @@ class TestDeleteTask(TasksTests):
         self.assertEqual(Task.objects.count(), self.count)
 
     def test_delete_task_unauthorised(self):
-        response = self.client.post(reverse_lazy('delete_task', kwargs={'pk': 3}))
+        response = self.client.post(
+            reverse_lazy('delete_task', kwargs={'pk': self.test_task3.id}))
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
