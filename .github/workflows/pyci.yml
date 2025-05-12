@@ -45,6 +45,10 @@ jobs:
       - name: Run test coverage
         run: |
           make test-coverage
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
       - name: SonarQubeScan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
