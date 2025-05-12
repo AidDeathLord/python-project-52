@@ -134,7 +134,7 @@ class TestTask(TestCase):
         self.assertEqual(
             Task.objects.get(id=self.test_task2.id).title, 'Test Task 1234')
         self.assertEqual(
-            Task.objects.get(id=self.test_task2.id).executor.id, 2)
+            Task.objects.get(id=self.test_task2.id).executor.id, self.test_user.id)
 
     def test_update_task_not_logged_in(self):
         self.client.logout()
