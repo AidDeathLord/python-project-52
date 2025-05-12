@@ -1,7 +1,7 @@
 install:
 	poetry install
 lint:
-	poetry run flake8 task_manager
+	poetry run ruff check task_manager
 build:
 	./build.sh
 test:
