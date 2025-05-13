@@ -1,21 +1,10 @@
-[project]
-authors = [
-    {name = "Ihar", email = "kostyuchik22@gmail.com"},
-]
-requires-python = "<4.0,>=3.11"
+[tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
+authors = ["Ihar <kostyuchik22@gmail.com>"]
 readme = "README.md"
 packages = [{include = "task_manager"}]
-
-#[tool.poetry]
-#name = "hexlet-code"
-#version = "0.1.0"
-#description = ""
-#authors = ["Ihar <kostyuchik22@gmail.com>"]
-#readme = "README.md"
-#packages = [{include = "task_manager"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -35,3 +24,14 @@ psycopg2-binary = "^2.9.10"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[project]
+authors = [
+    {name = "Ihar", email = "kostyuchik22@gmail.com"},
+]
+requires-python = "<4.0,>=3.11"
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+packages = [{include = "task_manager"}]
