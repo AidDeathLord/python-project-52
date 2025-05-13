@@ -1,3 +1,14 @@
+[project]
+authors = [
+    {name = "Ihar", email = "kostyuchik22@gmail.com"},
+]
+requires-python = "<4.0,>=3.12"
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+packages = [{include = "task_manager"}]
+
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
