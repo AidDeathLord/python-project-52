@@ -72,7 +72,6 @@ jobs:
           pip install poetry
           make install
           make migrate
-          make shell
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
 
