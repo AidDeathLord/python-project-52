@@ -42,15 +42,39 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
-      - name: Run test coverage
-        run: |
-          make test-coverage
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  sonarqube:
+    name: SonarQube Cloud
+    runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: postgres:15
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mydb
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
       - name: Install tox and any other packages
         run: pip install tox
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          make install
+          make migrate
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/mydb
+
       - name: Run tox
         run: tox -e py
       - name: SonarQube Scan
