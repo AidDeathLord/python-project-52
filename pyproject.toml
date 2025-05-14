@@ -29,7 +29,7 @@ build-backend = "poetry.core.masonry.api"
 authors = [
     {name = "Ihar", email = "kostyuchik22@gmail.com"},
 ]
-requires-python = "<4.0,>=3.11"
+requires-python = "<4.0,>=3.12"
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
