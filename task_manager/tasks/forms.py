@@ -15,5 +15,5 @@ class CreateTaskForm(forms.ModelForm):
         widgets = {
             'status': forms.Select(),
             'executor': forms.Select(),
-            'labels': forms.SelectMultiple(),
+            'label': forms.SelectMultiple(),
         }
