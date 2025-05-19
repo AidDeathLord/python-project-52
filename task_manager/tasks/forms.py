@@ -31,7 +31,8 @@ class CreateTaskForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': _('Имя')
             }
-        )
+        ),
+        label=_('Имя')
     )
 
     description = forms.CharField(
