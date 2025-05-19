@@ -37,6 +37,7 @@ class CreateTaskForm(forms.ModelForm):
                 }
             )
         )
+
         description = forms.CharField(
             widget=forms.Textarea(
                 attrs={
