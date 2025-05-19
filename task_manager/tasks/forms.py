@@ -68,8 +68,3 @@ class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'status', 'executor', 'label']
-    #
-    # def init(self, *args, **kwargs):
-    #     super().init(*args, **kwargs)
-    #     self.fields['executor'].label_from_instance = (lambda u: f"{u.first_name} {u.last_name}")  # DEBUG: посмотри, какие метки опций генерятся
-    #     print("DEBUG executor choices:", self.fields['executor'].choices)
