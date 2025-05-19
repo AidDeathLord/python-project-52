@@ -55,12 +55,13 @@ class CreateTaskForm(forms.ModelForm):
         queryset=User.objects.all(),
         required=False,
         label=_('Исполнитель'),
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.Select(attrs={'class': 'form-select'})
     )
 
     label = forms.ModelMultipleChoiceField(
         queryset=Label.objects.all(),
-        required=False, label=_('Метки'),
+        required=False,
+        label=_('Метки'),
         widget=forms.SelectMultiple(attrs={'class': 'form-select', 'size': '5'})
     )
 
