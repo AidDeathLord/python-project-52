@@ -16,4 +16,4 @@ class UserModelTest(UsersTests):
         self.assertEqual(user.last_name, 'Sapid')
         self.assertEqual(user.username, 'BestAlan')
         self.assertEqual(user.password, '3Al')
-        self.assertEqual(user.__str__(), 'BestAlan')
+        self.assertEqual(user.__str__(), 'Alan Sapid')
