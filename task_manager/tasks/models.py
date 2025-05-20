@@ -7,7 +7,7 @@ from django.utils.translation import gettext as _
 
 # Create your models here.
 class Task(models.Model):
-    title = models.CharField(max_length=150,
+    name = models.CharField(max_length=150,
                              unique=True,
                              verbose_name=_('Имя'))
     description = models.CharField(max_length=500,
@@ -32,7 +32,7 @@ class Task(models.Model):
                                    blank=True)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     class Meta:
         verbose_name = _('Задача')

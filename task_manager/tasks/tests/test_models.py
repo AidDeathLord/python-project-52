@@ -14,7 +14,7 @@ class TaskModelTest(TestCase):
         self.test_label = Label.objects.create(name='Test Label')
 
         self.test_task = Task.objects.create(
-            title='Test Task',
+            name='Test Task',
             description='Test Task',
             creator=self.test_user,
             status=self.test_status,
@@ -26,7 +26,7 @@ class TaskModelTest(TestCase):
 
         self.assertTrue(isinstance(self.test_task, Task))
         self.assertEqual(self.test_task.__str__(), 'Test Task')
-        self.assertEqual(self.test_task.title, 'Test Task')
+        self.assertEqual(self.test_task.name, 'Test Task')
         self.assertEqual(self.test_task.description, 'Test Task')
         self.assertEqual(self.test_task.creator, self.test_user)
         self.assertEqual(self.test_task.status, self.test_status)

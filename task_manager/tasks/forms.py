@@ -24,7 +24,7 @@ from task_manager.labels.models import Label
 
 
 class CreateTaskForm(forms.ModelForm):
-    title = forms.CharField(
+    name = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 'autofocus': True,
@@ -67,4 +67,4 @@ class CreateTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'description', 'status', 'executor', 'label']
+        fields = ['name', 'description', 'status', 'executor', 'label']

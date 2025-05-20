@@ -16,7 +16,7 @@ class TaskCreateFormTest(TestCase):
 
     def test_task_form_valid(self):
         task = {
-            'title': 'Test Task',
+            'name': 'Test Task',
             'description': 'Test Description',
             'creator': self.test_user.id,
             'status': self.test_status.id,
@@ -29,7 +29,7 @@ class TaskCreateFormTest(TestCase):
 
     def test_task_form_invalid(self):
         task = {
-            'title': '',
+            'name': '',
             'description': '',
             'creator': self.test_user.id,
             'status': '',
