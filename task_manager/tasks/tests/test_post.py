@@ -106,7 +106,7 @@ class TestTask(TestCase):
         )
         errors = response.context['form'].errors
 
-        self.assertIn('title', errors)
+        self.assertIn('name', errors)
         self.assertEqual(['Задача с таким Имя уже существует.'], errors['name'])
 
         self.assertEqual(response.status_code, 200)
