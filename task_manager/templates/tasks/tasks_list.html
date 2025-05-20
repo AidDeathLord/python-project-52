@@ -33,7 +33,7 @@
     {% for task in tasks %}    
       <tr>
         <td>{{ task.id }}</td>
-          <td><a href="{% url "show_task" pk=task.id %}">{{ task.title }}</a></td>
+          <td><a href="{% url "show_task" pk=task.id %}">{{ task.name }}</a></td>
         <td>{{ task.status }}</td>
         <td>{{ task.creator.first_name }} {{ task.creator.last_name }}</td>
         {% if task.executor == None %}  
