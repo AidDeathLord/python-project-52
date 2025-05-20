@@ -43,7 +43,7 @@ class LabelsDeleteView(UserLoginMixin,
                        SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
-    context_object_name = 'labels'
+    context_object_name = 'label'
     success_url = reverse_lazy('labels')
     success_message = _('Метка успешно удалена')
     error_url = reverse_lazy('labels')
@@ -52,7 +52,7 @@ class LabelsDeleteView(UserLoginMixin,
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(pk=kwargs.get('pk'))
         try:
-            Task.objects.get(label=label)
+            Task.objects.get(labels=label)
             messages.error(request, self.error_message)
             return redirect(self.error_url)
         except Task.DoesNotExist:
