@@ -17,14 +17,14 @@ class TestsTasksView(TestCase):
         self.test_label = Label.objects.create(name='Test Label')
 
         self.test_task = Task.objects.create(
-            title='Test Task 22',
+            name='Test Task 22',
             description='Test Task 22',
             creator=self.test_user,
             status=self.test_status,
             executor=self.test_user,
         )
         self.test_task2 = Task.objects.create(
-            title='Test Task 123',
+            name='Test Task 123',
             description='Test Task 123',
             creator=self.test_user,
             status=self.test_status,
@@ -86,7 +86,7 @@ class TestsTasksView(TestCase):
         self.assertContains(response, f'/tasks/{self.test_task.id}/update/')
         self.assertContains(response, f'/tasks/{self.test_task.id}/delete/')
 
-        self.assertContains(response, self.test_task.title)
+        self.assertContains(response, self.test_task.name)
         self.assertContains(response, self.test_task.description)
         self.assertContains(response, self.test_task.creator.first_name)
         self.assertContains(response, self.test_task.executor.first_name)
@@ -160,8 +160,8 @@ class TestsTasksView(TestCase):
                                    {'status': self.test_status.id})
 
         self.assertEqual(response.context['tasks'].count(), 2)
-        self.assertContains(response, self.test_task.title)
-        self.assertContains(response, self.test_task2.title)
+        self.assertContains(response, self.test_task.name)
+        self.assertContains(response, self.test_task2.name)
 
     def test_filter_tasks_executor(self):
         response = self.client.get(
@@ -169,5 +169,5 @@ class TestsTasksView(TestCase):
         )
 
         self.assertEqual(response.context['tasks'].count(), 1)
-        self.assertContains(response, self.test_task.title)
-        self.assertNotContains(response, self.test_task2.title)
+        self.assertContains(response, self.test_task.name)
+        self.assertNotContains(response, self.test_task2.name)
