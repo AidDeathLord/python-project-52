@@ -48,7 +48,7 @@ class TestTask(TestCase):
             'creator': self.test_user.id,
             'status': self.test_status.id,
             'executor': self.test_user.id,
-            'label': [self.test_label.id]
+            'labels': [self.test_label.id]
         }
 
         self.task2 = {
@@ -57,7 +57,7 @@ class TestTask(TestCase):
             'creator': self.test_user.id,
             'status': '',
             'executor': '',
-            'label': [self.test_label.id]
+            'labels': [self.test_label.id]
         }
 
         self.task3 = {

@@ -6,7 +6,7 @@ from task_manager.labels.models import Label
 
 
 class TaskFilter(FilterSet):
-    label = ModelChoiceFilter(
+    labels = ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=_('Метка')
     )
@@ -17,7 +17,7 @@ class TaskFilter(FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'label', 'logged_in_user']
+        fields = ['status', 'executor', 'labels', 'logged_in_user']
 
 
     def get_user_tasks(self, queryset, name, value):

@@ -22,7 +22,7 @@ class TaskModelTest(TestCase):
         )
 
     def test_task_creation(self):
-        self.test_task.label.add(self.test_label)
+        self.test_task.labels.add(self.test_label)
 
         self.assertTrue(isinstance(self.test_task, Task))
         self.assertEqual(self.test_task.__str__(), 'Test Task')
@@ -31,4 +31,4 @@ class TaskModelTest(TestCase):
         self.assertEqual(self.test_task.creator, self.test_user)
         self.assertEqual(self.test_task.status, self.test_status)
         self.assertEqual(self.test_task.executor, self.test_user)
-        self.assertEqual(str(self.test_task.label.last().name), 'Test Label')
+        self.assertEqual(str(self.test_task.labels.last().name), 'Test Label')

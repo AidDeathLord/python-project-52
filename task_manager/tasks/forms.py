@@ -58,7 +58,7 @@ class CreateTaskForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-select'})
     )
 
-    label = forms.ModelMultipleChoiceField(
+    labels = forms.ModelMultipleChoiceField(
         queryset=Label.objects.all(),
         required=False,
         label=_('Метки'),
@@ -67,4 +67,4 @@ class CreateTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'status', 'executor', 'label']
+        fields = ['name', 'description', 'status', 'executor', 'labels']

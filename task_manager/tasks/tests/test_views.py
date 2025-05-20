@@ -77,7 +77,7 @@ class TestsTasksView(TestCase):
         )
 
     def test_detailed_task_content(self):
-        self.test_task.label.add(self.test_label)
+        self.test_task.labels.add(self.test_label)
 
         response = self.client.get(
             reverse_lazy('show_task', kwargs={'pk': self.test_task.id})
@@ -92,7 +92,7 @@ class TestsTasksView(TestCase):
         self.assertContains(response, self.test_task.executor.first_name)
         self.assertContains(response, self.test_task.status.name)
 
-        for label in self.test_task.label.all():
+        for label in self.test_task.labels.all():
             self.assertContains(response, label.name)
 
     def test_detailed_task_not_logged_in(self):

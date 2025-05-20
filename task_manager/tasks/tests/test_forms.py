@@ -21,7 +21,7 @@ class TaskCreateFormTest(TestCase):
             'creator': self.test_user.id,
             'status': self.test_status.id,
             'executor': self.test_user.id,
-            'label': [self.test_label.id]
+            'labels': [self.test_label.id]
         }
 
         form = CreateTaskForm(data=task)
@@ -34,7 +34,7 @@ class TaskCreateFormTest(TestCase):
             'creator': self.test_user.id,
             'status': '',
             'executor': self.test_user.id,
-            'label': self.test_label.id
+            'labels': self.test_label.id
         }
 
         form = CreateTaskForm(data=task)

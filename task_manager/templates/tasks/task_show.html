@@ -32,7 +32,7 @@
         <div class="col">
           <h6>Метки:</h6>
           <ul>
-          {% for l in task.label.all %}  
+          {% for l in task.labels.all %}
             <li>{{ l.name }}</li>
           {% endfor %}  
           </ul>
