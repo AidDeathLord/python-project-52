@@ -43,7 +43,7 @@ class LabelsDeleteView(UserLoginMixin,
                        SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
-    context_object_name = 'label'
+    context_object_name = 'labels'
     success_url = reverse_lazy('labels')
     success_message = _('Метка успешно удалена')
     error_url = reverse_lazy('labels')
