@@ -7,13 +7,13 @@ class UsersTests(TestCase):
     VALID_CREATE_USER = {"username": "BestAlan",
                          "first_name": "Alan",
                          "last_name": "Sapid",
-                         "password1": "3Al",
+                         "password1": "3Al",  # NOSONAR
                          "password2": "3Al"}  # NOSONAR
 
     MISSING_FIELDS_USER = {"username": "BestAlan",
                            "first_name": "",
                            "last_name": "",
-                           "password1": "3Al",
+                           "password1": "3Al",  # NOSONAR
                            "password2": "3Al"}  # NOSONAR
 
     USER1 = {"first_name": "Alan",
@@ -24,7 +24,7 @@ class UsersTests(TestCase):
     USER1UPDATE = {"username": "AidD",
                    "first_name": "Alan",
                    "last_name": "Sapid",
-                   "password1": "3Al",
+                   "password1": "3Al",  # NOSONAR
                    "password2": "3Al"}  # NOSONAR
 
     USER2 = {"first_name": "Qwerty",
@@ -35,7 +35,7 @@ class UsersTests(TestCase):
     USER2UPDATE = {"first_name": "Qwerty",
                    "last_name": "Qwer",
                    "username": "3323",
-                   "password1": "12345",
+                   "password1": "12345",  # NOSONAR
                    "password2": "12345"}  # NOSONAR
 
     def setUp(self):
