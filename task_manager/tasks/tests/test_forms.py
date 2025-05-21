@@ -3,6 +3,8 @@ from task_manager.users.models import User
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
+from django.test import TestCase
+
 
 class TaskCreateFormTest(TestCase):
     def setUp(self):
