@@ -10,9 +10,9 @@ class LabelsTests(TestCase):
             "password": "3Al"}
 
     def setUp(self):
-        self.user = User.objects.create_user(self.USER)
+        self.test_user = User.objects.create_user(self.USER)
         self.label1 = Label.objects.create(name='TestLabel1')
         self.label2 = Label.objects.create(name='TestLabel2')
         self.labels_count = Label.objects.count()
 
-        self.client.force_login(self.user)
+        self.client.force_login(self.test_user)
