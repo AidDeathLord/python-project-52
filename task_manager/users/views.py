@@ -44,5 +44,7 @@ class UsersDeleteView(UserLoginMixin, UserDeletePermissionMixin,
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users')
     success_message = _('Пользователь успешно удален')
-    error_message = _('Невозможно удалить пользователя, потому что он используется')
+    error_message = _(
+        'Невозможно удалить пользователя, потому что он используется'
+    )
     error_url = reverse_lazy('users')

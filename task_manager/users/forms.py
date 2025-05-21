@@ -32,12 +32,20 @@ class UserForm(UserCreationForm):
     password2 = forms.CharField(
         label=_('Подтверждение пароля'),
         help_text=_('Для подтверждения введите, пожалуйста, пароль ещё раз.'),
-        widget=forms.PasswordInput(attrs={'placeholder': _('Подтверждение пароля')})
+        widget=forms.PasswordInput(
+            attrs={'placeholder': _('Подтверждение пароля')}
+        )
     )
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'password1',
+            'password2'
+        ]
 
 
 class UserUpdateForm(UserChangeForm):
@@ -60,7 +68,9 @@ class UserUpdateForm(UserChangeForm):
     password2 = forms.CharField(
         label=_('Подтверждение пароля'),
         help_text=_('Для подтверждения введите, пожалуйста, пароль ещё раз.'),
-        widget=forms.PasswordInput(attrs={'placeholder': _('Подтверждение пароля')})
+        widget=forms.PasswordInput(
+            attrs={'placeholder': _('Подтверждение пароля')}
+        )
     )
 
     def __init__(self, *args, **kwargs):
