@@ -11,15 +11,15 @@ class TestsTasksView(TestCase):
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='Test User',
-            password='123'  #NOSONAR
+            password='123'  # NOSONAR
         )
         self.test_user2 = User.objects.create_user(
             username='Test User2',
-            password='123'  #NOSONAR
+            password='123'  # NOSONAR
         )
         self.client.login(
             username='Test User',
-            password='123'  #NOSONAR
+            password='123'  # NOSONAR
         )
 
         self.test_status = Status.objects.create(name='Test Status')
