@@ -7,22 +7,6 @@ from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
 
-# class CreateTaskForm(forms.ModelForm):
-#     description = forms.CharField(
-#         widget=forms.Textarea(attrs={'placeholder': _('Описание')}),
-#         label=_('Описание')
-#     )
-#
-#     class Meta:
-#         model = Task
-#         fields = ['title', 'description', 'status', 'executor', 'label']
-#         widgets = {
-#             'status': forms.Select(),
-#             'executor': forms.Select(),
-#             'label': forms.SelectMultiple(),
-#         }
-
-
 class CreateTaskForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(

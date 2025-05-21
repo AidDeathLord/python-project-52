@@ -7,7 +7,7 @@ class LabelsTests(TestCase):
     USER = {"first_name": "Alan",
             "last_name": "Sapid",
             "username": "BestAlan",
-            "password": "3Al"}
+            "password": "3Al"} # NOSONAR
 
     def setUp(self):
         self.test_user = User.objects.create_user(self.USER)
