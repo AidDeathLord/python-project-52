@@ -6,12 +6,6 @@ from task_manager.tasks.models import Task
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
-from dotenv import load_dotenv
-import os
-
-
-load_dotenv()
-
 
 class TestsTasksView(TestCase):
     def setUp(self):
