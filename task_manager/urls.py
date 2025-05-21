@@ -18,8 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from task_manager.views import (IndexView,
                                 UserLoginView,
-                                UserLogoutView,
-                                test_rollbar)
+                                UserLogoutView)
 
 
 urlpatterns = [
