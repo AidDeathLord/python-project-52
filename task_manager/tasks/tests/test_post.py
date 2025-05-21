@@ -7,16 +7,27 @@ from task_manager.users.models import User
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
+
 
 class TestTask(TestCase):
     def setUp(self):
-        self.test_user = User.objects.create_user(username='Test User',
-                                                  password='123')
-        self.test_user2 = User.objects.create_user(
-            username='Test User2',
-            password='123'
+        self.test_user = User.objects.create_user(
+            username=os.getenv('TEST_USERNAME'),
+            password=os.getenv('TEST_PASSWORD')
         )
-        self.client.login(username='Test User', password='123')
+        self.test_user2 = User.objects.create_user(
+            username=os.getenv('TEST_USERNAME2'),
+            password=os.getenv('TEST_PASSWORD')
+        )
+        self.client.login(
+            username=os.getenv('TEST_USERNAME'),
+            password=os.getenv('TEST_PASSWORD')
+        )
 
         self.test_status = Status.objects.create(name='Test Status')
         self.test_status2 = Status.objects.create(name='Test Status2')

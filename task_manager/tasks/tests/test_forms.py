@@ -4,13 +4,23 @@ from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
 from django.test import TestCase
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 
 class TaskCreateFormTest(TestCase):
     def setUp(self):
-        self.test_user = User.objects.create_user(username='Test User',
-                                                  password='123')
-        self.client.login(username='Test User', password='123')
+        self.test_user = User.objects.create_user(
+            username=os.getenv('TEST_USERNAME'),
+            password=os.getenv('TEST_PASSWORD')
+        )
+        self.client.login(
+            username=os.getenv('TEST_USERNAME'),
+            password=os.getenv('TEST_PASSWORD')
+        )
 
         self.test_status = Status.objects.create(name='Test Status')
         self.test_label = Label.objects.create(name='Test Label')
