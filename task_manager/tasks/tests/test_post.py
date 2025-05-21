@@ -15,18 +15,22 @@ load_dotenv()
 
 
 class TestTask(TestCase):
+    USERNAME = os.getenv('TEST_USERNAME')
+    USERNAME2 = os.getenv('TEST_USERNAME2')
+    PASWRD = os.getenv('TEST_PASSWORD')
+
     def setUp(self):
         self.test_user = User.objects.create_user(
-            username=os.getenv('TEST_USERNAME'),
-            password=os.getenv('TEST_PASSWORD')
+            username=self.USERNAME,
+            password=self.PASWRD
         )
         self.test_user2 = User.objects.create_user(
-            username=os.getenv('TEST_USERNAME2'),
-            password=os.getenv('TEST_PASSWORD')
+            username=self.USERNAME2,
+            password=self.PASWRD
         )
         self.client.login(
-            username=os.getenv('TEST_USERNAME'),
-            password=os.getenv('TEST_PASSWORD')
+            username=self.USERNAME,
+            password=self.PASWRD
         )
 
         self.test_status = Status.objects.create(name='Test Status')

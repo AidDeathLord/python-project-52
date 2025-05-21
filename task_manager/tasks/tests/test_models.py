@@ -12,14 +12,17 @@ load_dotenv()
 
 
 class TaskModelTest(TestCase):
+    USERNAME = os.getenv('TEST_USERNAME')
+    PASWRD = os.getenv('TEST_PASSWORD')
+
     def setUp(self):
         self.test_user = User.objects.create_user(
-            username=os.getenv('TEST_USERNAME'),
-            password=os.getenv('TEST_PASSWORD')
+            username=self.USERNAME,
+            password=self.PASWRD
         )
         self.client.login(
-            username=os.getenv('TEST_USERNAME'),
-            password=os.getenv('TEST_PASSWORD')
+            username=self.USERNAME,
+            password=self.PASWRD
         )
 
         self.test_status = Status.objects.create(name='Test Status')
