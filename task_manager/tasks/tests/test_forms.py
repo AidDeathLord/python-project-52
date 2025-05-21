@@ -8,10 +8,8 @@ from django.test import TestCase
 
 class TaskCreateFormTest(TestCase):
     def setUp(self):
-        self.test_user = User.objects.create_user(
-            username='Test User',
-            password='123'
-        )
+        self.test_user = User.objects.create_user(username='Test User',
+                                                  password='123')
         self.client.login(username='Test User', password='123')
 
         self.test_status = Status.objects.create(name='Test Status')

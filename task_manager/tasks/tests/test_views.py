@@ -9,14 +9,10 @@ from task_manager.labels.models import Label
 
 class TestsTasksView(TestCase):
     def setUp(self):
-        self.test_user = User.objects.create_user(
-            username='Test User',
-            password='123'
-        )
-        self.test_user2 = User.objects.create_user(
-            username='Test User2',
-            password='123'
-        )
+        self.test_user = User.objects.create_user(username='Test User',
+                                                  password='123')
+        self.test_user2 = User.objects.create_user(username='Test User2',
+                                                   password='123')
         self.client.login(username='Test User', password='123')
 
         self.test_status = Status.objects.create(name='Test Status')
