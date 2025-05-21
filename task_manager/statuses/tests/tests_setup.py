@@ -7,7 +7,7 @@ class StatusesTests(TestCase):
     USER = {"first_name": "Alan",
             "last_name": "Sapid",
             "username": "BestAlan",
-            "password": "3Al"} # NOSONAR
+            "password": "3Al"}  # NOSONAR
 
     def setUp(self):
         self.user = User.objects.create_user(self.USER)
