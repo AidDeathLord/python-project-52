@@ -64,7 +64,9 @@ class TestUpdateView(StatusesTests):
 
     def test_statuses_view_unauthenticated_user(self):
         self.client.logout()
-        response = self.client.get(reverse_lazy('update_status', kwargs={'pk': self.status1.id}))
+        response = self.client.get(
+            reverse_lazy('update_status', kwargs={'pk': self.status1.id})
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('login'))
@@ -81,7 +83,9 @@ class TestDeleteView(StatusesTests):
 
     def test_statuses_view_unauthenticated_user(self):
         self.client.logout()
-        response = self.client.get(reverse_lazy('delete_status', kwargs={'pk': self.status1.id}))
+        response = self.client.get(
+            reverse_lazy('delete_status', kwargs={'pk': self.status1.id})
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('login'))

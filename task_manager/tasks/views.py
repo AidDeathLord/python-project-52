@@ -1,10 +1,15 @@
 from task_manager.tasks.models import Task
 from .forms import CreateTaskForm
 from django.utils.translation import gettext as _
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import (CreateView,
+                                  UpdateView,
+                                  DeleteView,
+                                  DetailView)
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
-from task_manager.mixins import UserLoginMixin, ProtectDeleteMixin, AuthorDeletionMixin
+from task_manager.mixins import (UserLoginMixin,
+                                 ProtectDeleteMixin,
+                                 AuthorDeletionMixin)
 from django.contrib.messages.views import SuccessMessageMixin
 from .filters import TaskFilter
 

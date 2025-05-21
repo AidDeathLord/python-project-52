@@ -19,7 +19,6 @@ class TaskFilter(FilterSet):
         model = Task
         fields = ['status', 'executor', 'labels', 'logged_in_user']
 
-
     def get_user_tasks(self, queryset, name, value):
         if value:
             user = self.request.user

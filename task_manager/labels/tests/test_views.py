@@ -64,7 +64,12 @@ class TestUpdateView(LabelsTests):
 
     def test_labels_view_unauthenticated_user(self):
         self.client.logout()
-        response = self.client.get(reverse_lazy('update_label', kwargs={'pk': self.label1.id}))
+        response = self.client.get(
+            reverse_lazy(
+                'update_label',
+                kwargs={'pk': self.label1.id}
+            )
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('login'))
@@ -81,7 +86,12 @@ class TestDeleteView(LabelsTests):
 
     def test_labels_view_unauthenticated_user(self):
         self.client.logout()
-        response = self.client.get(reverse_lazy('delete_label', kwargs={'pk': self.label1.id}))
+        response = self.client.get(
+            reverse_lazy(
+                'delete_label',
+                kwargs={'pk': self.label1.id}
+            )
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('login'))

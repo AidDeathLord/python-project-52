@@ -10,8 +10,14 @@ from task_manager.labels.models import Label
 
 class TestTask(TestCase):
     def setUp(self):
-        self.test_user = User.objects.create_user(username='Test User', password='123')
-        self.test_user2 = User.objects.create_user(username='Test User2', password='123')
+        self.test_user = User.objects.create_user(
+            username='Test User',
+            password='123'
+        )
+        self.test_user2 = User.objects.create_user(
+            username='Test User2',
+            password='123'
+        )
         self.client.login(username='Test User', password='123')
 
         self.test_status = Status.objects.create(name='Test Status')
@@ -129,9 +135,13 @@ class TestTask(TestCase):
 
         self.assertEqual(Task.objects.count(), self.count)
         self.assertEqual(
-            Task.objects.get(id=self.test_task2.id).name, 'Test Task 1234')
+            Task.objects.get(id=self.test_task2.id).name,
+            'Test Task 1234'
+        )
         self.assertEqual(
-            Task.objects.get(id=self.test_task2.id).executor.id, self.test_user.id)
+            Task.objects.get(id=self.test_task2.id).executor.id,
+            self.test_user.id
+        )
 
     def test_update_task_not_logged_in(self):
         self.client.logout()
