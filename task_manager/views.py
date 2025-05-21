@@ -5,7 +5,6 @@ from task_manager.users.forms import UserLoginForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.http import HttpResponse
 
 
 class IndexView(View):
